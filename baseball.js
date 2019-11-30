@@ -11,76 +11,116 @@
 var result = document.getElementById("result")
 var record = document.getElementById("record")
 var hitNum = document.getElementById("hit")
+var div2 = document.getElementById("div2")
 
-
+//random choose
 var ruleArr = ["스트라이크", "스트라이크", "스트라이크", "스트라이크", "볼", "볼", "볼", "볼", "안타", "아웃"]
 
-//랜덤
 var choose = function() {
     var index = Math.floor(Math.random() * 10)
     var rule = ruleArr[index]
     return rule
 };
 
-//전광판 0S 0B 0O
+//전역변수 0S 0B 0O, 현재안타수:hit
 var s = 0;
 var b = 0;
 var o = 0;
 var hit = 0;
 
-// 보여주기
-var show = function(rule) {
+//초기화
+var init = function() {
+        s = 0
+        b = 0
+    }
+    //////////////////////////////////////////////////////////
+
+// strike 3개
+var strike = function() {
+    if (s === 3) {
+        o++
+        init();
+        result.innerHTML = "스트라이크! <Br> 아웃! 다음 타자가 타석에 입장했습니다."
+        record.innerHTML = s + "S " + b + "B " + o + "O "
+    }
+}
+
+//ball 4개
+var ball = function() {
+    if (b === 4) {
+        hit++
+        init();
+        result.innerHTML = "볼! 출루! <Br> 다음 타자가 타석에 입장했습니다."
+        record.innerHTML = s + "S " + b + "B " + o + "O "
+        hitNum.innerHTML = "현재 안타수: " + hit
+    }
+}
+
+// out 3 개
+var out = function() {
+    if (o === 3) {
+        result.innerHTML = "아웃!"
+        record.innerHTML = s + "S " + b + "B " + o + "O "
+        hitNum.innerHTML = "최종 안타수: " + hit + "<br><br> GAME OVER"
+    }
+}
+
+
+
+//심판
+var referee = function(rule) {
     if (rule === "스트라이크") {
         s++
         result.innerHTML = "스트라이크!"
         record.innerHTML = s + "S " + b + "B " + o + "O "
+        strike();
+
     } else if (rule === "볼") {
         b++
         result.innerHTML = "볼!"
         record.innerHTML = s + "S " + b + "B " + o + "O "
+        ball();
+
     } else if (rule === "안타") {
         hit++
+        init();
         result.innerHTML = "안타! 다음 타자가 타석에 입장했습니다."
         record.innerHTML = s + "S " + b + "B " + o + "O "
         hitNum.innerHTML = "현재 안타수: " + hit
-        init();
+
     } else if (rule === "아웃") {
         o++
+        init();
         result.innerHTML = "아웃! 다음 타자가 타석에 입장했습니다."
         record.innerHTML = s + "S " + b + "B " + o + "O "
-        init();
     }
+    out();
 }
 
 
-//초기화
-var init = function() {
-    s = 0
-    b = 0
+// 경기기록
+var print = function() {
+    var x1 = document.createElement("p")
+    x1.innerHTML = result.innerHTML
+    var x2 = document.createElement("p")
+    x2.innerHTML = record.innerHTML
+    var x3 = document.createElement("p")
+    x3.innerHTML = hitNum.innerHTML
+
+    div2.appendChild(x1)
+    div2.appendChild(x2)
+    div2.appendChild(x3)
+
+    var x4 = document.createElement("br")
+    div2.appendChild(x4)
 }
 
-// strike 3개 ball 4개 out 3개
-var judge = function() {
-    if (s === 3) {
-        o++
-        result.innerHTML = "스트라이크! 아웃!, 다음 타자가 타석에 입장했습니다."
-        init();
-    } else if (b === 4) {
-        hit++
-        result.innerHTML = "볼! 출루!, 다음 타자가 타석에 입장했습니다."
-        hitNum.innerHTML = "현재 안타수: " + hit
-        init();
-    } else if (o === 3) {
-        alert("게임종료")
-        result.innerHTML = ""
-        hitNum.innerHTML = "최종 안타수: " + hit
-        record.innerHTML = "GAME OVER"
-    }
-}
-
-
+//
 function main() {
-    var game = choose();
-    show(game);
-    judge();
+    if (o === 3) {
+        return
+    }
+    var game = choose()
+    referee(game)
+    print();
 }
