@@ -40,7 +40,7 @@ var strike = function() {
         o++
         init();
         result.innerHTML = "스트라이크! <Br> 아웃! 다음 타자가 타석에 입장했습니다."
-        record.innerHTML = s + "S " + b + "B " + o + "O "
+        pointBoard();
     }
 }
 
@@ -50,7 +50,7 @@ var ball = function() {
         hit++
         init();
         result.innerHTML = "볼! <Br> 출루! 다음 타자가 타석에 입장했습니다."
-        record.innerHTML = s + "S " + b + "B " + o + "O "
+        pointBoard();
         hitNum.innerHTML = "현재 안타수: " + hit
     }
 }
@@ -59,39 +59,42 @@ var ball = function() {
 var out = function() {
     if (o === 3) {
         result.innerHTML = "아웃!"
-        record.innerHTML = s + "S " + b + "B " + o + "O "
+        pointBoard();
         hitNum.innerHTML = "최종 안타수: " + hit + "<br><br> GAME OVER"
     }
 }
 
-
+// 0S 0B 0O 점수판
+var pointBoard = function() {
+    return record.innerHTML = s + "S " + b + "B " + o + "O "
+}
 
 //심판
 var referee = function(rule) {
     if (rule === "스트라이크") {
         s++
         result.innerHTML = "스트라이크!"
-        record.innerHTML = s + "S " + b + "B " + o + "O "
+        pointBoard();
         strike();
 
     } else if (rule === "볼") {
         b++
         result.innerHTML = "볼!"
-        record.innerHTML = s + "S " + b + "B " + o + "O "
+        pointBoard();
         ball();
 
     } else if (rule === "안타") {
         hit++
         init();
         result.innerHTML = "안타! 다음 타자가 타석에 입장했습니다."
-        record.innerHTML = s + "S " + b + "B " + o + "O "
+        pointBoard();
         hitNum.innerHTML = "현재 안타수: " + hit
 
     } else if (rule === "아웃") {
         o++
         init();
         result.innerHTML = "아웃! 다음 타자가 타석에 입장했습니다."
-        record.innerHTML = s + "S " + b + "B " + o + "O "
+        pointBoard();
     }
     out();
 }
@@ -99,19 +102,19 @@ var referee = function(rule) {
 
 // 경기기록
 var print = function() {
-    var x1 = document.createElement("p")
+    var p1 = document.createElement("p")
     x1.innerHTML = result.innerHTML
-    var x2 = document.createElement("p")
+    var p2 = document.createElement("p")
     x2.innerHTML = record.innerHTML
-    var x3 = document.createElement("p")
+    var p3 = document.createElement("p")
     x3.innerHTML = hitNum.innerHTML
 
-    div2.appendChild(x1)
-    div2.appendChild(x2)
-    div2.appendChild(x3)
+    div2.appendChild(p1)
+    div2.appendChild(p2)
+    div2.appendChild(p3)
 
-    var x4 = document.createElement("br")
-    div2.appendChild(x4)
+    var br1 = document.createElement("br")
+    div2.appendChild(br1)
 }
 
 //
