@@ -13,7 +13,7 @@ var record = document.getElementById("record")
 var hitNum = document.getElementById("hit")
 var div2 = document.getElementById("div2")
 
-//random choose
+//choose random
 var ruleArr = ["스트라이크", "스트라이크", "스트라이크", "스트라이크", "볼", "볼", "볼", "볼", "안타", "아웃"]
 
 var choose = function() {
@@ -30,10 +30,9 @@ var hit = 0;
 
 //초기화
 var init = function() {
-        s = 0
-        b = 0
-    }
-    //////////////////////////////////////////////////////////
+    s = 0
+    b = 0
+}
 
 // strike 3개
 var strike = function() {
@@ -50,7 +49,7 @@ var ball = function() {
     if (b === 4) {
         hit++
         init();
-        result.innerHTML = "볼! 출루! <Br> 다음 타자가 타석에 입장했습니다."
+        result.innerHTML = "볼! <Br> 출루! 다음 타자가 타석에 입장했습니다."
         record.innerHTML = s + "S " + b + "B " + o + "O "
         hitNum.innerHTML = "현재 안타수: " + hit
     }
