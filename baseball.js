@@ -103,11 +103,11 @@ var referee = function(rule) {
 // 경기기록
 var print = function() {
     var p1 = document.createElement("p")
-    p1.innerHTML = result.innerHTML
+    x1.innerHTML = result.innerHTML
     var p2 = document.createElement("p")
-    p2.innerHTML = record.innerHTML
+    x2.innerHTML = record.innerHTML
     var p3 = document.createElement("p")
-    p3.innerHTML = hitNum.innerHTML
+    x3.innerHTML = hitNum.innerHTML
 
     div2.appendChild(p1)
     div2.appendChild(p2)
