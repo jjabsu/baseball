@@ -12,12 +12,11 @@ function choose() {
 }
 
 //구간
-//ball ~ 1 은 안타구간
 // 타율 하나 가져오려면 hArr[0], range1(hArr[0])
-
 var outRange
 var strikeRange
 var ballRange
+    //ballRange ~ 1 은 안타구간
 
 function range(h) {
     outRange = 0.1
@@ -44,62 +43,59 @@ function initHit() {
 }
 
 //결과표현
-function show(a, b) {
-    result.innerHTML = a
-    record.innerHTML = b
+function show(x, y) {
+    result.innerHTML = x
+    record.innerHTML = s + "S" + b + "B" + o + "O <br><br> 안타수" + hit + "<br> 총 안타수" + hitAll + "점수" + score
+    hitterName.innerHTML = y
 }
 
 
 //
-function referee(hitterArr) {
+function referee(nameArr) {
     if (0 <= random && random <= outRange) {
         o++
         init();
-        hitterName.innerHTML = hitterArr
-        show("아웃!", s + "S" + b + "B" + o + "O <br><br> 안타수" + hit + "<br> 총 안타수" + hitAll + "점수" + score)
+        show("아웃!", nameArr)
     } else if (outRange < random && random <= strikeRange) {
         s++
-        hitterName.innerHTML = hitterArr
-        show("스트라이크!", s + "S" + b + "B" + o + "O <br><br> 안타수" + hit + "<br> 총 안타수" + hitAll + "점수" + score)
+        show("스트라이크!", nameArr)
         judgeStrike();
     } else if (strikeRange < random && random <= ballRange) {
         b++
-        hitterName.innerHTML = hitterArr
-        show("볼!", s + "S" + b + "B" + o + "O <br><br> 안타수" + hit + "<br> 총 안타수" + hitAll + "점수" + score)
+        show("볼!", nameArr)
         judgeBall()
     } else if (ballRange < random && random <= 1) {
         hit++
         hitAll++
         init();
-        hitterName.innerHTML = hitterArr
-        show("안타!", s + "S" + b + "B" + o + "O <br><br> 안타수" + hit + "<br> 총 안타수" + hitAll + "점수" + score)
+        show("안타!", nameArr)
         judgeHit()
     }
     judgeOut();
 }
 
 //judge
-function judgeStrike() {
+function judgeStrike(nameArr) {
     if (s === 3) {
         init()
         o++
-        show("스트라이크! 아웃!", s + "S" + b + "B" + o + "O <br><br> 안타수" + hit + "<br> 총 안타수" + hitAll + "점수" + score)
+        show("스트라이크! 아웃!", nameArr)
     }
 }
 
-function judgeBall() {
+function judgeBall(nameArr) {
     if (b === 4) {
         init()
         hit++
         hitAll++
-        show("볼! 출루!", s + "S" + b + "B" + o + "O <br><br> 안타수" + hit + "<br> 총 안타수" + hitAll + "점수" + score)
+        show("볼! 출루!", nameArr)
     }
 }
 
 function judgeOut() {
     if (o === 3) {
-        initHit()
         init()
+        initHit()
         show("아웃!", "최종 점수: " + score + "<br><br> GAME OVER")
     }
 }
@@ -108,30 +104,34 @@ function judgeOut() {
 function judgeHit() {
     if (hit === 4) { // 4일때 하나 score하나 올라가고 5부터는 score 하나씩 올라감
         score++
-        initHit()
         init()
+        initHit()
     } else if (score > 0) {
         score = hitAll - 4
     }
 }
 
 //출력
-function print() {
+var progressRecord = document.getElementById("progressRecord")
 
+function print() {
+    var p1 = document.createElement("p")
+    p1.innerHTML
+    progressRecord.appendChild(p1)
+
+    var p2 = document.createElement("p")
+    p2.innerHTML
+    progressRecord.appendChild(p2)
+
+    var p3 = document.createElement("p")
+    p3.innerHTML
+    progressRecord.appendChild(p3)
 }
 
 
 // 임시실행
-
 function main() {
-    while (true) {
-        if (o === 3) {
-            return
-        }
-        choose()
-        range(hArr1[0])
-        referee(hitterArr1[0])
-        console.log(result.innerHTML)
-        console.log(record.innerHTML)
-    }
+    choose()
+    range(hArr1[0])
+    referee(nameArr1[0])
 }

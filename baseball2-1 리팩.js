@@ -10,8 +10,8 @@ var out2 = document.getElementById("out2")
 
 //빈배열
 var team1 = []
-var nameArr1 = [] //타자이름
-var hArr1 = [] //타율
+var nameArr1 = ["채희찬", "임경순"] //타자이름 ****************임시값
+var hArr1 = [0.234, 0.211] //타율 ****************임시값
 
 var team2 = []
 var nameArr2 = [] //타자이름
@@ -19,8 +19,8 @@ var hArr2 = [] //타율
 
 //이름
 function inputTeamName(team) { // 매개변수활용하기 teamNum:매개변수 x는 그냥 변수선언
-    var x = prompt("팀 이름 입력")
-    team.push(x)
+    var teamName = prompt("팀 이름 입력")
+    team.push(teamName)
 }
 
 /*
@@ -31,8 +31,8 @@ function teamName(teamNum, teamName) { // 이렇게 쓰면 어떻게 처리할�
 
 //투수
 function inputPitcher(team) {
-    var x = prompt("투수 정보 입력")
-    team.push(x)
+    var pitcherInfo = prompt("투수 정보 입력")
+    team.push(pitcherInfo)
 }
 
 
@@ -58,6 +58,7 @@ function InputHitter(team, nameArr, hArr) {
 
 
 /*
+분리해서 구현하려면????
 function getName(nameArr) {
     var x = hitterArr.shift()
     nameArr.push(x)

@@ -10,34 +10,46 @@
         div {
             padding: 30px;
         }
+        
+        #progress {
+            border: green solid 5px;
+        }
     </style>
 </head>
 
 <body>
 
-    <div>
-        <button id="input" onclick="input(team1, nameArr1, hArr1)">1팀정보 입력</button>
-        <button id="print" onclick="print(team1, out1)">1팀정보 보기</button>
-        <button id="input" onclick="input(team2, nameArr2, hArr2)">2팀정보 입력</button>
-        <button id="print" onclick="print(team2, out2)">2팀정보 보기</button>
+    <div id="input">
+        <button onclick="input(team1, nameArr1, hArr1)">1팀정보 입력</button>
+        <button onclick="input(team2, nameArr2, hArr2)">2팀정보 입력</button>
+    </div>
+
+    <div id="output">
+        <button onclick="print(team1, out1)">1팀정보 보기</button>
+        <button onclick="print(team2, out2)">2팀정보 보기</button>
+        <div id="out1"></div>
+        <div id="out2"></div>
     </div>
 
     <div>
         <button id="start">시합시작</button>
     </div>
 
-
-    <div id="out1"></div>
-    <div id="out2"></div>
-
     <div id="progress">
-        <button id="run" onclick="main()">실행</button>
+        <button onclick="main()">실행</button>
         <p id="hitterName"></p>
         <p id="result"></p>
         <p id="record"></p>
     </div>
 
+    <div id="progressRecord">
+        <p>경기기록</p>
+    </div>
+
     <script src="baseball2-1 리팩.js"></script>
+    <script src="baseball2-2 리팩.js"></script>
+    <!-- <script src="baseball2-2 리팩 연습.js"></script> -->
+
 </body>
 
 </html>
