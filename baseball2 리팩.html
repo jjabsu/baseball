@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>팀데이터 입력 및 시합 기능 구현</title>
+    <style>
+        div {
+            padding: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <button id="input" onclick="input(team1, nameArr1, hArr1)">1팀정보 입력</button>
+        <button id="print" onclick="print(team1, out1)">1팀정보 보기</button>
+        <button id="input" onclick="input(team2, nameArr2, hArr2)">2팀정보 입력</button>
+        <button id="print" onclick="print(team2, out2)">2팀정보 보기</button>
+    </div>
+
+    <div>
+        <button id="start">시합시작</button>
+    </div>
+
+
+    <div id="out1"></div>
+    <div id="out2"></div>
+
+    <div id="progress">
+        <button id="run" onclick="main()">실행</button>
+        <p id="hitterName"></p>
+        <p id="result"></p>
+        <p id="record"></p>
+    </div>
+
+    <script src="baseball2-1 리팩.js"></script>
+</body>
+
+</html>
