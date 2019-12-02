@@ -10,11 +10,12 @@ var out2 = document.getElementById("out2")
 
 //빈배열
 var team1 = [] //팀정보
+var hitterArr1 = []; //타자이름
 var hArr1 = [] //타율
 
 var team2 = []
+var hitterArr2 = []
 var hArr2 = []
-
 
 //팀정보입력
 function teamName1() {
@@ -44,7 +45,7 @@ function hitter1() {
     for (var i = 0; i < 1; i++) {
         var hitter = prompt(n + " 번 타자 정보 입력 \n\n 이름, 타율(소수점이하 3자리까지 입력)")
         n++
-        var hitterArr1 = hitter.split(",") // ["채희찬", "0.333"]
+        hitterArr1 = hitter.split(", ") // ["채희찬", "0.333"]
         team1.push(hitter)
         var strH = hitterArr1.pop(); // ["0.333"] //hitterArr에서 빼서 hArr1에 넣어줌 // 바보짓했네 바로 team1에서 빼서 넣어주면 되잖아
         var numH = Number(strH)
@@ -57,7 +58,7 @@ function hitter2() {
     for (var i = 0; i < 1; i++) {
         var hitter = prompt(n + " 번 타자 정보 입력 \n\n 이름, 타율(소수점이하 3자리까지 입력)")
         n++
-        var hitterArr2 = hitter.split(",") // ["채희찬", "0.333"]
+        hitterArr2 = hitter.split(", ") // ["채희찬", "0.333"]
         team2.push(hitter)
         var strH = hitterArr2.pop(); // ["0.333"] //hitterArr에서 빼서 hArr1에 넣어줌 // 바보짓했네 바로 team2에서 빼서 넣어주면 되잖아
         var numH = Number(strH)
@@ -85,8 +86,8 @@ function check2() {
 }
 
 function input1() {
-    teamName1()
-    pitcher1()
+    // teamName1()
+    // pitcher1()
     hitter1()
     check1()
 }
@@ -125,7 +126,7 @@ function print2() {
     out2.appendChild(p)
 
     var n = 1
-    for (var i = 1; i < team1.length - 1; i++) {
+    for (var i = 1; i < team2.length - 1; i++) {
         p = document.createElement("p")
         p.innerHTML = n + " 번 타자: " + team2[i]
         out2.appendChild(p)
