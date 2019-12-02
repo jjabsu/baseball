@@ -10,10 +10,10 @@ var out2 = document.getElementById("out2")
 
 //빈배열
 var team1 = [] //팀정보
-var betting1 = [] //타율
+var hArr1 = [] //타율
 
 var team2 = []
-var betting2 = []
+var hArr2 = []
 
 
 //팀정보입력
@@ -21,6 +21,7 @@ function teamName1() {
     var teamName = prompt("팀 이름 입력")
     team1.push(teamName)
 }
+
 function teamName2() {
     var teamName = prompt("팀 이름 입력")
     team2.push(teamName)
@@ -31,6 +32,7 @@ function pitcher1() {
     var pitcher = prompt("투수 정보 입력")
     team1.push(pitcher)
 }
+
 function pitcher2() {
     var pitcher = prompt("투수 정보 입력")
     team2.push(pitcher)
@@ -44,9 +46,9 @@ function hitter1() {
         n++
         var hitterArr1 = hitter.split(",") // ["채희찬", "0.333"]
         team1.push(hitter)
-        var strH = hitterArr1.pop();   // ["0.333"] //hitterArr에서 빼서 betting1에 넣어줌 // 바보짓했네 바로 team1에서 빼서 넣어주면 되잖아
+        var strH = hitterArr1.pop(); // ["0.333"] //hitterArr에서 빼서 hArr1에 넣어줌 // 바보짓했네 바로 team1에서 빼서 넣어주면 되잖아
         var numH = Number(strH)
-        betting1.push(numH)     // [0.333] 
+        hArr1.push(numH) // [0.333] 
     }
 }
 
@@ -57,15 +59,15 @@ function hitter2() {
         n++
         var hitterArr2 = hitter.split(",") // ["채희찬", "0.333"]
         team2.push(hitter)
-        var strH = hitterArr2.pop();   // ["0.333"] //hitterArr에서 빼서 betting1에 넣어줌 // 바보짓했네 바로 team2에서 빼서 넣어주면 되잖아
+        var strH = hitterArr2.pop(); // ["0.333"] //hitterArr에서 빼서 hArr1에 넣어줌 // 바보짓했네 바로 team2에서 빼서 넣어주면 되잖아
         var numH = Number(strH)
-        betting2.push(numH)     // [0.333] 
+        hArr2.push(numH) // [0.333] 
     }
 }
 
 //check
 function check1() {
-    if (String(betting1[0]).length !== 5 && typeof (betting1[0]) === 'number') {
+    if (String(hArr1[0]).length !== 5 && typeof(hArr1[0]) === 'number') {
         alert("다시 입력해주세요!")
         return
     } else {
@@ -74,7 +76,7 @@ function check1() {
 }
 
 function check2() {
-    if (String(betting2[0]).length !== 5 && typeof (betting2[0]) === 'number') {
+    if (String(hArr2[0]).length !== 5 && typeof(hArr2[0]) === 'number') {
         alert("다시 입력해주세요!")
         return
     } else {
@@ -134,5 +136,3 @@ function print2() {
     p.innerHTML = "투수: " + team2[(team2.length - 2)]
     out2.appendChild(p)
 }
-
-
