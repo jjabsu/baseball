@@ -34,73 +34,67 @@ var init = function() {
     b = 0
 }
 
-// strike 3개
+// 현재상황보여주기
+var show = function(a, b, c) {
+    result.innerHTML = a
+    record.innerHTML = b
+    hitNum.innerHTML = c
+}
+
+/////////////////////////////////////////////////////
+// strike 3개인 경우
 var strike = function() {
     if (s === 3) {
         o++
         init();
-        result.innerHTML = "스트라이크! <Br> 아웃! 다음 타자가 타석에 입장했습니다."
-        pointBoard();
+        show("스트라이크! <Br> 아웃! 다음 타자가 타석에 입장했습니다.", s + "S " + b + "B " + o + "O ", "현재 안타수: " + hit)
     }
 }
 
-//ball 4개
+//ball 4개인 경우
 var ball = function() {
     if (b === 4) {
         hit++
         init();
-        result.innerHTML = "볼! <Br> 출루! 다음 타자가 타석에 입장했습니다."
-        pointBoard();
-        hitNum.innerHTML = "현재 안타수: " + hit
+        show("볼! <Br> 출루! 다음 타자가 타석에 입장했습니다.", s + "S " + b + "B " + o + "O ", "현재 안타수: " + hit)
     }
 }
 
-// out 3 개
+// out 3개인 경우
 var out = function() {
     if (o === 3) {
-        result.innerHTML = "아웃!"
-        pointBoard();
-        hitNum.innerHTML = "최종 안타수: " + hit + "<br><br> GAME OVER"
+        show("아웃!", s + "S " + b + "B " + o + "O ", "최종 안타수: " + hit + "<br><br> GAME OVER")
     }
 }
 
-// 0S 0B 0O 점수판
-var pointBoard = function() {
-    return record.innerHTML = s + "S " + b + "B " + o + "O "
-}
-
+////////////////////////////////////////////////////
 //심판
 var referee = function(rule) {
     if (rule === "스트라이크") {
         s++
-        result.innerHTML = "스트라이크!"
-        pointBoard();
+        show("스트라이크!", s + "S " + b + "B " + o + "O ", "현재 안타수: " + hit)
         strike();
 
     } else if (rule === "볼") {
         b++
-        result.innerHTML = "볼!"
-        pointBoard();
+        show("볼!", s + "S " + b + "B " + o + "O ", "현재 안타수: " + hit)
         ball();
 
     } else if (rule === "안타") {
         hit++
         init();
-        result.innerHTML = "안타! 다음 타자가 타석에 입장했습니다."
-        pointBoard();
-        hitNum.innerHTML = "현재 안타수: " + hit
+        show("안타! 다음 타자가 타석에 입장했습니다.", s + "S " + b + "B " + o + "O ", "현재 안타수: " + hit)
 
     } else if (rule === "아웃") {
         o++
         init();
-        result.innerHTML = "아웃! 다음 타자가 타석에 입장했습니다."
-        pointBoard();
+        show("아웃! 다음 타자가 타석에 입장했습니다.", s + "S " + b + "B " + o + "O ", "현재 안타수: " + hit)
     }
-    out();
+    out(); // 모든 곳에서 다 검사해야됨
 }
 
 
-// 경기기록
+// 경기기록 보여주기
 var print = function() {
     var p1 = document.createElement("p")
     p1.innerHTML = result.innerHTML
