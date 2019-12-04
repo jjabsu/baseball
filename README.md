@@ -1,3 +1,6 @@
+STEP-1, STEP-2, STEP-3 브랜치로 각각 작업하다
+제출시 MERGE하였습니다.
+
 ##1단계 요구사항
 
 파일: basebaseball.html	
