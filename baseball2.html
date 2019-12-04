@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>팀데이터 입력 및 시합 기능 구현</title>
+    <style>
+        div {
+            border: red solid 5px;
+            padding: 20px
+        }
+        
+        #progress {
+            border: green solid 5px;
+        }
+        /* 경기진행상황 */
+        
+        #progressRecord {
+            border: green solid 5px;
+        }
+        /* 경기기록 */
+    </style>
+</head>
+
+<body>
+    <div>
+        <button onclick="input(team1, nameArr1, hArr1)">1팀정보 입력</button>
+        <button onclick="input(team2, nameArr2, hArr2)">2팀정보 입력</button>
+    </div>
+
+    <div>
+        <button onclick="printOutput(team1, printOutputSpan1, nameArr1, hArr1)">1팀정보 보기</button>
+        <button onclick="printOutput(team2, printOutputSpan2, nameArr2, hArr2)">2팀정보 보기</button>
+        <span id="printOutputSpan1"></span>
+        <span id="printOutputSpan2"></span>
+    </div>
+
+    <div id="progress">
+        <button onclick="game()">SWING</button>
+        <p>경기상황</p>
+        <p>==================</p>
+        <p id="inning"></p>
+        <p id="hitterName"></p>
+        <p id="result"></p>
+        <p id="record"></p>
+        <p id="score"></p>
+    </div>
+
+    <div id="progressRecord">
+        <p>경기기록</p>
+        <p>==================</p>
+    </div>
+
+    <script src="baseball2-1.js"></script>
+    <script src="baseball2-2.js"></script>
+
+</body>
+
+</html>
