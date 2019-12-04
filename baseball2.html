@@ -10,34 +10,42 @@
         div {
             padding: 30px;
         }
+        
+        #progress {
+            border: green solid 5px;
+        }
     </style>
 </head>
 
 <body>
-
     <div>
-        <button id="input" onclick="input1()">1팀정보 입력</button>
-        <button id="print" onclick="print1()">1팀정보 보기</button>
-        <button id="input" onclick="input2()">2팀정보 입력</button>
-        <button id="print" onclick="print2()">2팀정보 보기</button>
+        <button onclick="input(team1, nameArr1, hArr1)">1팀정보 입력</button>
+        <button onclick="input(team2, nameArr2, hArr2)">2팀정보 입력</button>
     </div>
 
     <div>
-        <button id="start">시합시작</button>
+        <button onclick="printOutput(team1, span1, nameArr1)">1팀정보 보기</button>
+        <button onclick="printOutput(team2, span2, nameArr2)">2팀정보 보기</button>
+        <span id="span1"></span>
+        <span id="span2"></span>
     </div>
 
-
-    <div id="out1"></div>
-    <div id="out2"></div>
     <div id="progress">
-        <button id="run" onclick="main()">실행</button>
-        <p id="hitterName"></p>
+        <button onclick="game()">게임하기</button>
+        <p id="inning"></p>
+        <p id="name1"></p>
         <p id="result"></p>
         <p id="record"></p>
+        <p id="score"></p>
+    </div>
+
+    <div id="progressRecord">
+        <p>경기기록</p>
     </div>
 
     <script src="baseball2-1.js"></script>
     <script src="baseball2-2.js"></script>
+
 </body>
 
 </html>

@@ -5,135 +5,87 @@
 // 편의를 위해 에러 처리 등의 기능을 구현한다.
 
 //엘리먼트
-var out1 = document.getElementById("out1")
-var out2 = document.getElementById("out2")
+var span1 = document.getElementById("span1");
+var span2 = document.getElementById("span2");
 
 //빈배열
-var team1 = [] //팀정보
-var hitterArr1 = []; //타자이름
-var hArr1 = [] //타율
+var team1 = ["우리", "채희찬"];
+var nameArr1 = ["채희찬1", "채희찬2", "채희찬3", "채희찬4", "채희찬5", "채희찬6", "채희찬7", "채희찬8", "채희찬9"];
+//타자이름 ****************임시값
+var hArr1 = [0.201, 0.202, 0.203, 0.204, 0.205, 0.206, 0.207, 0.208, 0.209];
+//타율 ****************임시값
 
-var team2 = []
-var hitterArr2 = []
-var hArr2 = []
+var team2 = ["너네", "한준희"];
+var nameArr2 = ["한준희1", "한준희2", "한준희3", "한준희4", "한준희5", "한준희6", "한준희7", "한준희8", "한준희9", ];
+//타자이름****************임시값
+var hArr2 = [0.201, 0.202, 0.203, 0.204, 0.205, 0.206, 0.207, 0.208, 0.209];
+//타율 ****************임시값
+
+//팀이름넣기
+function inputTeamName(team) {
+    var teamName = prompt("팀이름 입력");
+    team.push(teamName);
+}
+
+//투수정보넣기
+function inputPitcher(team) {
+    var pitcherInfo = prompt("투수 정보 입력");
+    team.push(pitcherInfo);
+}
+
+
+//타자정보 넣기
+var hitterArr = []; //hitterArr에 타자정보 계속 갱신
+
+function InputHitter(team, nameArr, hArr) {
+    var n = 1
+    for (var i = 0; i < 2; i++) {
+        var hitterInfo = prompt(n + " 번 타자 정보 입력 \n\n 이름, 타율(소수점이하 3자리까지 입력)"); //"채희찬, 0.333"
+        n++;
+        team.push(hitterInfo);
+        hitterArr = hitterInfo.split(", "); // ["채희찬", "0.333"] 
+
+        var hitterName = hitterArr.shift(); // nameArr에 타자 이름 넣어줌
+        nameArr.push(hitterName);
+
+        var h = hitterArr.pop();
+        var numberH = Number(h);
+        hArr.push(numberH); // hArr에 타자 이름 넣어줌
+    }
+}
+
+//타자 정보 입력값 에러처리                        ---알고리즘이 이상함
+function checkInput(team, hArr) {
+    if (String(hArr[0]).length !== 5 || typeof(hArr[0]) !== 'number') {
+        alert("다시 입력해주세요! 입력형식은 이름, 타율(소수점이하 3자리까지 입력)입니다.")
+    } else {
+        alert(team[0] + " 팀의 정보 입력이 완료되었습니다.")
+    }
+}
 
 //팀정보입력
-function teamName1() {
-    var teamName = prompt("팀 이름 입력")
-    team1.push(teamName)
-}
-
-function teamName2() {
-    var teamName = prompt("팀 이름 입력")
-    team2.push(teamName)
-}
-
-//투수정보입력
-function pitcher1() {
-    var pitcher = prompt("투수 정보 입력")
-    team1.push(pitcher)
-}
-
-function pitcher2() {
-    var pitcher = prompt("투수 정보 입력")
-    team2.push(pitcher)
-}
-
-//타자정보입력
-function hitter1() {
-    var n = 1
-    for (var i = 0; i < 1; i++) {
-        var hitter = prompt(n + " 번 타자 정보 입력 \n\n 이름, 타율(소수점이하 3자리까지 입력)")
-        n++
-        hitterArr1 = hitter.split(", ") // ["채희찬", "0.333"]
-        team1.push(hitter)
-        var strH = hitterArr1.pop(); // ["0.333"] //hitterArr에서 빼서 hArr1에 넣어줌 // 바보짓했네 바로 team1에서 빼서 넣어주면 되잖아
-        var numH = Number(strH)
-        hArr1.push(numH) // [0.333] 
-    }
-}
-
-function hitter2() {
-    var n = 1
-    for (var i = 0; i < 1; i++) {
-        var hitter = prompt(n + " 번 타자 정보 입력 \n\n 이름, 타율(소수점이하 3자리까지 입력)")
-        n++
-        hitterArr2 = hitter.split(", ") // ["채희찬", "0.333"]
-        team2.push(hitter)
-        var strH = hitterArr2.pop(); // ["0.333"] //hitterArr에서 빼서 hArr1에 넣어줌 // 바보짓했네 바로 team2에서 빼서 넣어주면 되잖아
-        var numH = Number(strH)
-        hArr2.push(numH) // [0.333] 
-    }
-}
-
-//check
-function check1() {
-    if (String(hArr1[0]).length !== 5 && typeof(hArr1[0]) === 'number') {
-        alert("다시 입력해주세요!")
-        return
-    } else {
-        alert("1팀의 정보 입력이 완료되었습니다.")
-    }
-}
-
-function check2() {
-    if (String(hArr2[0]).length !== 5 && typeof(hArr2[0]) === 'number') {
-        alert("다시 입력해주세요!")
-        return
-    } else {
-        alert("2팀의 정보 입력이 완료되었습니다.")
-    }
-}
-
-function input1() {
-    // teamName1()
-    // pitcher1()
-    hitter1()
-    check1()
-}
-
-function input2() {
-    teamName2()
-    pitcher2()
-    hitter2()
-    check2()
+function input(team, nameArr, hArr) {
+    inputTeamName(team);
+    inputPitcher(team);
+    InputHitter(team, nameArr, hArr)
+    checkInput(team, hArr)
 }
 
 //팀정보출력
-function print1() {
+function printOutput(team, span, nameArr) {
+    var printP1 = document.createElement("p")
+    printP1.innerHTML = team[0] + " 팀의 정보입니다."
+    span.appendChild(printP1)
 
-    var p = document.createElement("p")
-    p.innerHTML = team1[0] + " 팀의 정보입니다."
-    out1.appendChild(p)
-
-    var n = 1
-    for (var i = 1; i < team1.length - 1; i++) {
-        p = document.createElement("p")
-        p.innerHTML = n + " 번 타자: " + team1[i]
-        out1.appendChild(p)
-        n++
-    }
-
-    var p = document.createElement("p")
-    p.innerHTML = "투수: " + team1[(team1.length - 1)]
-    out1.appendChild(p)
-}
-
-function print2() {
-
-    var p = document.createElement("p")
-    p.innerHTML = team2[0] + " 팀의 정보입니다."
-    out2.appendChild(p)
+    var printP2 = document.createElement("p")
+    printP2.innerHTML = "투수: " + team[1]
+    span.appendChild(printP2)
 
     var n = 1
-    for (var i = 1; i < team2.length - 1; i++) {
-        p = document.createElement("p")
-        p.innerHTML = n + " 번 타자: " + team2[i]
-        out2.appendChild(p)
+    for (var i = 0; i < nameArr.length; i++) {
+        var printP3 = document.createElement("p")
+        printP3.innerHTML = n + " 번 타자: " + nameArr[i]
+        span.appendChild(printP3)
         n++
     }
-
-    var p = document.createElement("p")
-    p.innerHTML = "투수: " + team2[(team2.length - 2)]
-    out2.appendChild(p)
 }
