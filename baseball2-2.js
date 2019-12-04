@@ -1,6 +1,6 @@
-var progress = document.getElementById("progress"); //진행상황 각 p태그에 붙임
+var progress = document.getElementById("progress");
 var inning = document.getElementById("inning");
-var name1 = document.getElementById("name1");
+var hitterName = document.getElementById("hitterName");
 var result = document.getElementById("result");
 var record = document.getElementById("record");
 var score = document.getElementById("score")
@@ -79,30 +79,14 @@ function judgeBall(setHitterName, team) {
     if (bCount === 4) {
         hitCount++;
         initSB();
-        stackPlus(team);
+        stackPlus(team); //다음타자
         show(setHitterName, "볼! 출루! 안타수+1");
-    }
-}
-
-//아웃 3개인 경우 판단
-function judgeOut() {
-    if (oCount === 3) {
-        initSB();
-        initHitCount();
-        initOCount();
-        change++; // 다음 팀 넘어가기
-        if (change % 2 === 0) {
-            nCount++
-        }
-        if (change === 12 && change % 2 !== 0) {
-            show("아웃!", "최종 점수: " + "<br> 1팀: " + team1Score + "<br> 2팀: " + team2Score + "<br><br> GAME OVER")
-        }
     }
 }
 
 //안타 4개인 경우 판단
 function judgeHit(team) {
-    if (hitCount > 3) { // 4까지 하나 score하나 올라가고 5부터는 score 하나씩 올라감
+    if (hitCount > 3) { // 4부터 score 1씩 올라감
         if (team === 'team1') {
             team1Score++;
         } else if (team === 'team2') {
@@ -110,11 +94,25 @@ function judgeHit(team) {
         }
     }
 }
+
+// 아웃 3 개인 경우 판단
+
+function judgeOut() {
+    if (oCount >= 3) {
+        initSB();
+        initOCount();
+        initHitCount();
+        change++; // 다음 팀 넘어가기
+        if (change % 2 === 0) {
+            nCount++
+        }
+    }
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //스윙결과보여주기
-function show(showName, showResult) {
-    name1.innerHTML = showName;
+function show(showhitterName, showResult) {
+    hitterName.innerHTML = showhitterName;
     result.innerHTML = showResult;
     record.innerHTML = sCount + "S" + bCount + "B" + oCount + "O <br> 안타수" + hitCount;
     score.innerHTML = team1[0] + "팀의 현재점수: " + team1Score + " 점" + "<br>" + team2[0] + "팀의 현재점수: " + team2Score + " 점";
@@ -130,7 +128,7 @@ function swing(team) {
         oCount++;
         initSB();
         show(setHitterName, "아웃!");
-        stackPlus(team); // stackPlus()에 setHitter()들어있어서 stackPlus실행되면 새로운 타자나옴
+        stackPlus(team); //다음타자
 
     } else if (outRange < random && random <= strikeRange) {
         sCount++;
@@ -144,52 +142,14 @@ function swing(team) {
         judgeBall(setHitterName);
 
 
-        //안타
     } else if (ballRange < random && random <= 1) {
         initSB();
         hitCount++;
         judgeHit(team);
         show(setHitterName, "안타!");
-        stackPlus(team);
+        stackPlus(team); //다음타자
     }
-    judgeOut(); // 아웃 3개
-}
-
-//game은 스윙 한번씩 진행
-var change = 0;
-
-function game() {
-    if ((change % 2) === 0) {
-        if (oCount < 3) {
-            inning.innerHTML = nCount + "회초 " + team1[0] + " 공격"
-            setHitter('team1'); //setHitterName setHitterH에 값 넣어줌
-            swing('team1'); // 넣어준 값으로 스윙
-        }
-    } else {
-        if (oCount < 3) {
-            inning.innerHTML = nCount + "회말 " + team2[0] + " 공격"
-            setHitter('team2');
-            swing('team2');
-        }
-    }
-}
-
-//공격팀
-function attackTeam(team) { //team매개변수에 'team1' 들어감
-
-    setHitter(team); //공격팀에서 타자한명 올림 //setHitterName = nameArr1(team1stack[0]) setHitterH = hArr1(team1stack[0])
-
-    while (oCount < 3) {
-        swing(team);
-        // 타자가 swing을 하는데 그때마다 s b o 가 바뀜
-        // o가 나온 경우, s가 3인 경우, b가 4인 경우, hit이 나온 경우에
-        // stackPlus에서 stack올리고 setHitter실행해줌
-    }
-
-    if (oCount >= 3) {
-        initHitCount();
-        initOCount();
-    }
+    judgeOut();
 }
 
 // 타석에 타자올리기
@@ -224,58 +184,60 @@ function initStack() {
     }
 }
 
-//출력
-function printProgressRecord() {
-    var prP1 = document.createElement("p");
-    prP1.innerHTML = result.innerHTML
-    progressRecord.appendChild(prP1);
+//스윙 한번씩 진행
+var change = 0; // 공수교환해주는 값
 
-    var prP2 = document.createElement("p");
-    prP2.innerHTML = record.innerHTML
-    progressRecord.appendChild(prP2);
-
-    var prP3 = document.createElement("p");
-    prP3.innerHTML = score.innterHTMl
-    progressRecord.appendChild(prP3);
-
-    var prP4 = document.createElement("p");
-    prP4.innerHTML = name1.innterHTMl
-    progressRecord.appendChild(prP4);
-
-    // var brbrbr = document.createElement("br")
-    // progressRecord.appendChild(brbrbr)
-}
-
-
-/*
-//main은 6회 진행
-var change = 0;
-
-function main1() {
-    for (var i = 0; i < 12; i++) {
-        if ((i % 2) === 0) {
-            attackTeam('team1');
-            change++
-        } else {
-            attackTeam('team2');
-            change++
+function game() {
+    if (nCount > 6) {
+        result.innerHTML = "GAME OVER";
+        record.innerHTML = "최종 점수: " + "<br> 1팀: " + team1Score + "<br> 2팀: " + team2Score + "<br> GAME OVER";
+        return;
+    }
+    if (change % 2 === 0) {
+        if (oCount < 3) {
+            inning.innerHTML = nCount + "회초 " + team1[0] + " 공격"
+            attackTeam('team1')
+        }
+    } else {
+        if (oCount < 3) {
+            inning.innerHTML = nCount + "회말 " + team2[0] + " 공격"
+            attackTeam('team2')
         }
     }
 }
-*/
 
-
-/*
-// main2는 3out씩 진행
-var change = 0;
-
-function main2() {
-    if ((change % 2) === 0) {
-        attackTeam('team1');
-        change++
-    } else {
-        attackTeam('team2');
-        change++
-    }
+//공격팀
+function attackTeam(team) {
+    setHitter(team); //setHitterName setHitterH에 값 넣어줌
+    swing(team); // 넣어준 값으로 스윙
+    printProgressRecord();
 }
-*/
+
+
+
+//출력
+function printProgressRecord() {
+    var prP5 = document.createElement("p");
+    prP5.innerHTML = inning.innerHTML
+    progressRecord.appendChild(prP5);
+
+    var prP1 = document.createElement("p");
+    prP1.innerHTML = hitterName.innerHTML
+    progressRecord.appendChild(prP1);
+
+    var prP2 = document.createElement("p");
+    prP2.innerHTML = result.innerHTML
+    progressRecord.appendChild(prP2);
+
+    var prP3 = document.createElement("p");
+    prP3.innerHTML = record.innerHTML
+    progressRecord.appendChild(prP3);
+
+    var prP4 = document.createElement("p");
+    prP4.innerHTML = score.innerHTML
+    progressRecord.appendChild(prP4);
+
+    var liner = document.createElement("p")
+    liner.innerHTML = "=================="
+    progressRecord.appendChild(liner)
+}

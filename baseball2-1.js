@@ -5,25 +5,30 @@
 // 편의를 위해 에러 처리 등의 기능을 구현한다.
 
 //엘리먼트
-var span1 = document.getElementById("span1");
-var span2 = document.getElementById("span2");
+var printOutputSpan1 = document.getElementById("printOutputSpan1");
+var printOutputSpan2 = document.getElementById("printOutputSpan2");
 
-//빈배열
-var team1 = ["우리", "채희찬"];
-var nameArr1 = ["채희찬1", "채희찬2", "채희찬3", "채희찬4", "채희찬5", "채희찬6", "채희찬7", "채희찬8", "채희찬9"];
-//타자이름 ****************임시값
-var hArr1 = [0.201, 0.202, 0.203, 0.204, 0.205, 0.206, 0.207, 0.208, 0.209];
-//타율 ****************임시값
+// 빈배열
+var team1 = [];
+var nameArr1 = [];
+var hArr1 = [];
 
-var team2 = ["너네", "한준희"];
-var nameArr2 = ["한준희1", "한준희2", "한준희3", "한준희4", "한준희5", "한준희6", "한준희7", "한준희8", "한준희9", ];
-//타자이름****************임시값
-var hArr2 = [0.201, 0.202, 0.203, 0.204, 0.205, 0.206, 0.207, 0.208, 0.209];
-//타율 ****************임시값
+var team2 = [];
+var nameArr2 = [];
+var hArr2 = [];
+
+// var team1 = ["롯데", "박찬호"]; // 팀배열임시값
+// var nameArr1 = ["채희찬1", "채희찬2", "채희찬3", "채희찬4", "채희찬5", "채희찬6", "채희찬7", "채희찬8", "채희찬9"]; //타자이름 임시값
+// var hArr1 = [0.201, 0.202, 0.203, 0.204, 0.205, 0.206, 0.207, 0.208, 0.209]; //타율 임시값
+
+// var team2 = ["삼성", "류현진"]; // 팀배열임시값
+// var nameArr2 = ["채승훈1", "채승훈2", "채승훈3", "채승훈4", "채승훈5", "채승훈6", "채승훈7", "채승훈8", "채승훈9"]; //타자이름 임시값
+// var hArr2 = [0.201, 0.202, 0.203, 0.204, 0.205, 0.206, 0.207, 0.208, 0.209]; //타율 임시값
+
 
 //팀이름넣기
 function inputTeamName(team) {
-    var teamName = prompt("팀이름 입력");
+    var teamName = prompt("팀 이름 입력");
     team.push(teamName);
 }
 
@@ -39,14 +44,14 @@ var hitterArr = []; //hitterArr에 타자정보 계속 갱신
 
 function InputHitter(team, nameArr, hArr) {
     var n = 1
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < 9; i++) {
         var hitterInfo = prompt(n + " 번 타자 정보 입력 \n\n 이름, 타율(소수점이하 3자리까지 입력)"); //"채희찬, 0.333"
         n++;
         team.push(hitterInfo);
         hitterArr = hitterInfo.split(", "); // ["채희찬", "0.333"] 
 
-        var hitterName = hitterArr.shift(); // nameArr에 타자 이름 넣어줌
-        nameArr.push(hitterName);
+        var name = hitterArr.shift();
+        nameArr.push(name); // nameArr에 타자 이름 넣어줌
 
         var h = hitterArr.pop();
         var numberH = Number(h);
@@ -54,7 +59,7 @@ function InputHitter(team, nameArr, hArr) {
     }
 }
 
-//타자 정보 입력값 에러처리                        ---알고리즘이 이상함
+//타자 정보 입력값 에러처리                        
 function checkInput(team, hArr) {
     if (String(hArr[0]).length !== 5 || typeof(hArr[0]) !== 'number') {
         alert("다시 입력해주세요! 입력형식은 이름, 타율(소수점이하 3자리까지 입력)입니다.")
@@ -67,12 +72,12 @@ function checkInput(team, hArr) {
 function input(team, nameArr, hArr) {
     inputTeamName(team);
     inputPitcher(team);
-    InputHitter(team, nameArr, hArr)
-    checkInput(team, hArr)
+    InputHitter(team, nameArr, hArr);
+    checkInput(team, hArr);
 }
 
 //팀정보출력
-function printOutput(team, span, nameArr) {
+function printOutput(team, span, nameArr, hArr) {
     var printP1 = document.createElement("p")
     printP1.innerHTML = team[0] + " 팀의 정보입니다."
     span.appendChild(printP1)
@@ -84,7 +89,7 @@ function printOutput(team, span, nameArr) {
     var n = 1
     for (var i = 0; i < nameArr.length; i++) {
         var printP3 = document.createElement("p")
-        printP3.innerHTML = n + " 번 타자: " + nameArr[i]
+        printP3.innerHTML = n + " 번 타자: " + nameArr[i] + " 타율: " + hArr[i]
         span.appendChild(printP3)
         n++
     }

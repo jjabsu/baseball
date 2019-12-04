@@ -8,12 +8,19 @@
     <title>팀데이터 입력 및 시합 기능 구현</title>
     <style>
         div {
-            padding: 30px;
+            border: red solid 5px;
+            padding: 20px
         }
         
         #progress {
             border: green solid 5px;
         }
+        /* 경기진행상황 */
+        
+        #progressRecord {
+            border: green solid 5px;
+        }
+        /* 경기기록 */
     </style>
 </head>
 
@@ -24,16 +31,18 @@
     </div>
 
     <div>
-        <button onclick="printOutput(team1, span1, nameArr1)">1팀정보 보기</button>
-        <button onclick="printOutput(team2, span2, nameArr2)">2팀정보 보기</button>
-        <span id="span1"></span>
-        <span id="span2"></span>
+        <button onclick="printOutput(team1, printOutputSpan1, nameArr1, hArr1)">1팀정보 보기</button>
+        <button onclick="printOutput(team2, printOutputSpan2, nameArr2, hArr2)">2팀정보 보기</button>
+        <span id="printOutputSpan1"></span>
+        <span id="printOutputSpan2"></span>
     </div>
 
     <div id="progress">
-        <button onclick="game()">게임하기</button>
+        <button onclick="game()">SWING</button>
+        <p>경기상황</p>
+        <p>==================</p>
         <p id="inning"></p>
-        <p id="name1"></p>
+        <p id="hitterName"></p>
         <p id="result"></p>
         <p id="record"></p>
         <p id="score"></p>
@@ -41,6 +50,7 @@
 
     <div id="progressRecord">
         <p>경기기록</p>
+        <p>==================</p>
     </div>
 
     <script src="baseball2-1.js"></script>
